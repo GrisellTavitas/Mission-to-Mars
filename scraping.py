@@ -97,7 +97,7 @@ def mars_facts():
     df.set_index('description', inplace=True)
     
     #Convert dataframe into HTML format, add bootstrap
-    return df.to_html()
+    return df.to_html(classes="table table-striped")
 
 
 def mars_hemispheres(browser):
@@ -110,17 +110,19 @@ def mars_hemispheres(browser):
 
     # Write code to retrieve the image urls and titles for each hemisphere.
     for i in range(4):
-        #create empty dictionary
-        hemispheres = {}
+               
         images = browser.find_by_tag('h3')
         images[i].click()
         html = browser.html
         images_soup = soup(html, 'html.parser')
-        image_url_part = images_soup.find("img", class_="wide-image")["src"]
-        img_title = images_soup.find("h2",class_="title").text
-        img_url_complete = f'https://marshemispheres.com/{image_url_part}'
+        img_title = images_soup.find('h2', class_='title').text
+        img_url = images_soup.find('li').a.get('href')
+        
+        #create empty dictionary
+        hemispheres = {}
+        img_url_complete = f'https://marshemispheres.com/{img_url}'
         hemispheres = {img_title, img_url_complete}
-        hemisphere_image_urls.append((hemispheres))
+        hemisphere_image_urls.append(hemispheres)
         browser.back()
 
     # Print the list that holds the dictionary of each image url and title.
