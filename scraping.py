@@ -1,5 +1,5 @@
 # Import Splinter and BeautifulSoup
-from splinter import Browser, browser
+from splinter import Browser
 from bs4 import BeautifulSoup as soup
 import pandas as pd
 import datetime as dt
@@ -110,7 +110,6 @@ def mars_hemispheres(browser):
 
     # Write code to retrieve the image urls and titles for each hemisphere.
     for i in range(4):
-               
         images = browser.find_by_tag('h3')
         images[i].click()
         html = browser.html
@@ -120,8 +119,8 @@ def mars_hemispheres(browser):
         
         #create empty dictionary
         hemispheres = {}
-        img_url_complete = f'https://marshemispheres.com/{img_url}'
-        hemispheres = {img_title, img_url_complete}
+        hemispheres['img_url'] = f'https://marshemispheres.com/{img_url}'
+        hemispheres['title'] = img_title
         hemisphere_image_urls.append(hemispheres)
         browser.back()
 
