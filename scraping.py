@@ -120,7 +120,7 @@ def mars_hemispheres(browser):
         img_title = images_soup.find("h2",class_="title").text
         img_url_complete = f'https://marshemispheres.com/{image_url_part}'
         hemispheres = {img_title, img_url_complete}
-        hemisphere_image_urls.append(hemispheres)
+        hemisphere_image_urls.append((hemispheres))
         browser.back()
 
     # Print the list that holds the dictionary of each image url and title.
